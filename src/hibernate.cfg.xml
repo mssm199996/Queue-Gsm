@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<hibernate-configuration>
+    <session-factory>
+        
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">org.sqlite.JDBC</property>
+        <property name="connection.url">jdbc:sqlite:database/PostUsbGsm.db</property>
+        <property name="hibernate.dialect">Utilities.DataHandlers.SQLiteDialect</property>
+        <property name="connection.username"></property>
+        <property name="connection.password"></property>
+        <property name="connection.pool_size">1</property>
+        <property name="show_sql">true</property>
+        <mapping class="POO.SMS"/>
+        <mapping class="POO.Poste"/>
+        <mapping class="POO.Client"/>
+    </session-factory>
+</hibernate-configuration>

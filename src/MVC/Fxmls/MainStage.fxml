@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane id="AnchorPane" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MVC.Controllers.MainStageController">
+   <top>
+      <BorderPane BorderPane.alignment="CENTER">
+         <top>
+            <ToolBar prefHeight="50.0" BorderPane.alignment="CENTER">
+              <items>
+                  <JFXHamburger fx:id="newClientHambuger">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </JFXHamburger>
+                  <Separator orientation="VERTICAL" />
+                  <JFXButton fx:id="onOffButton" onAction="#startApplication" text="Lancer l'application">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/startApp.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <Separator orientation="VERTICAL" />
+                  <JFXButton fx:id="refreshButton" onAction="#refreshGsmPortList" text="Rafraichir la liste des ports">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/Update.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/gsmPort.png" />
+                     </image>
+                  </ImageView>
+                  <JFXComboBox fx:id="gsmPortComboBox" labelFloat="true" prefWidth="125.0" promptText="Port GSM" />
+                  <Separator orientation="VERTICAL" />
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/ticket.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="ndtTextField" labelFloat="true" prefWidth="150.0" promptText="Numero du dernier ticket" text="1" disable="true" opacity="1.0"/>
+                  <Separator orientation="VERTICAL" />
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/statePost.png" />
+                     </image>
+                  </ImageView>
+                  <JFXComboBox fx:id="postStateComboBox" labelFloat="true" prefWidth="150.0" promptText="Etat de la poste" />
+                  <Separator orientation="VERTICAL" />
+                  <JFXButton onAction="#defilerClient" text="Défiler le client suivant">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/nextOne.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <Separator orientation="VERTICAL" />
+              </items>
+               <BorderPane.margin>
+                  <Insets top="5.0" />
+               </BorderPane.margin>
+            </ToolBar>
+         </top>
+         <center>
+            <JFXDrawer fx:id="newClientDrawer" defaultDrawerSize="50.0" direction="TOP" BorderPane.alignment="CENTER">
+               <sidePane>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <HBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/Name.jpg.png" />
+                                 </image>
+                              </ImageView>
+                              <JFXTextField fx:id="newClientNameTextField" labelFloat="true" onKeyReleased="#addNewClient" prefWidth="200.0" promptText="Nom du client" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/NDT.png" />
+                                 </image>
+                              </ImageView>
+                              <JFXTextField fx:id="newClientTelTextField" labelFloat="true" prefWidth="200.0" promptText="Numero de telephone (facultatif)" />
+                           </children>
+                        </HBox>
+                        <JFXButton onAction="#addNewClient" prefHeight="35.0" prefWidth="180.0" text="Ajouter le client">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/addClient.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="15.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </sidePane>
+            </JFXDrawer>
+         </center>
+      </BorderPane>
+   </top>
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <TableView fx:id="clientsTableView" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn minWidth="180.0" prefWidth="180.0" style="-fx-alignment: center; -fx-pref-height: 50;" text="Numero du ticket">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/ticket.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
+                <TableColumn minWidth="200.0" prefWidth="250.0" style="-fx-alignment: center; -fx-pref-height: 50;" text="Nom du client">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/Name.jpg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
+                  <TableColumn prefWidth="250.0" style="-fx-alignment: center; -fx-pref-height: 50;" text="Numero de telephone">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/NDT.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
+              </columns>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </BorderPane.margin>
+            </TableView>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
